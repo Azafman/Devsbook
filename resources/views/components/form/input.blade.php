@@ -1,0 +1,1 @@
+<input type="{{$type}}" placeholder="{{$place ?? ''}}" class="input {{$class2 ?? ''}}" name="{{$name ?? ''}}">
