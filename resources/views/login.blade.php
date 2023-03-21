@@ -12,7 +12,8 @@
     <x-login-main/>
     {{-- <x-form.container-form msg="Não tem conta ? Crie Aqui" auth="/register" acao="Entrar"/> --}}
     <section class="container main">
-        <form method="POST">
+        <form method="POST" action="{{route('loginAction')}}">
+            @csrf
     
             <x-form.input type="email" place="Digite seu e-mail" name="email" class1="input"/>
             
@@ -20,7 +21,7 @@
     
             <x-form.acessar auth="Logar"/>
     
-            <a href="/register">Não tem Conta ? Registre-se </a>
+            <a href="{{route('register')}}">Não tem Conta ? Registre-se </a>
         </form>
     </section>
 </body>

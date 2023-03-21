@@ -11,19 +11,26 @@
 <body>
     <x-login-main/>
     <section class="container main">
-        <form method="POST">
+        <form method="POST" action="{{route('registerAction')}}">
+            @csrf
+            @if ($errors->any()){{-- se tiver algum erro --}}
+                <ul class="alert alert-error">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
             <x-form.input type="text" place="Digite seu nome" name="name" class1="input"/>
     
             <x-form.input type="email" place="Digite seu e-mail" name="email" class1="input"/>
             
             <x-form.input type="password" place="Digite sua senha" name="password" class1="input"/>
             
-            <x-form.input type="password" place="Confirme sua senha" name="password" class1="input"/>
+            <x-form.input type="password" place="Confirme sua senha" name="password_confirmation" class1="input"/>
             
             <x-form.acessar auth="Criar Conta"/>
     
-            <a href="/login">Já tem Conta ? Entre aqui</a>
-        </form>
+            <a href="{{route('login')}}">Já tem Conta ? Entre aqui</a>
     </section>
 </body>
 </html>
