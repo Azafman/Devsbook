@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Devsbook - Início</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <x-header-all-pages nameUser="{{ $name ?? 'nome provisório' }}" />
+    <section class="container main">
+        <aside class="mt-10">
+            <nav>
+                <x-link-menu link="{{''}}" class2="active" img="home-run" text="Home" />
+
+                <x-link-menu link="{{''}}" img="user" text="Meu Perfil" />
+
+                <x-link-menu link="{{''}}" img="friends" text="Amigos">
+                    @slot('quantidadeAmigos')
+                        <div class="menu-item-badge">
+                            {{ $quantidadeAmigos }}
+                        </div>
+                    @endslot
+                </x-link-menu>
+
+                <x-link-menu link="{{''}}" img="photo" text="Fotos">
+                    @slot('barra')
+                        <div class='menu-splitter'></div>
+                    @endslot
+                </x-link-menu>
+
+
+                <a href="">
+                    <div class="menu-item">
+                        <div class="menu-item-icon">
+                            <img src="assets/images/settings.png" width="16" height="16" />
+                        </div>
+                        <div class="menu-item-text">
+                            Configurações
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="menu-item">
+                        <div class="menu-item-icon">
+                            <img src="assets/images/power.png" width="16" height="16" />
+                        </div>
+                        <div class="menu-item-text">
+                            Sair
+                        </div>
+                    </div>
+                </a>
+            </nav>
+        </aside>
+        {{$bodyFeed ?? ''}}
+    </section>
+    <div class="modal">
+        <div class="modal-inner">
+            <a rel="modal:close">&times;</a>
+            <div class="modal-content"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/vanillaModal.js"></script>
+</body>
+
+</html>
