@@ -12,7 +12,13 @@ class UserController extends Controller
         //dd(Auth::user()->id);
         $user = Auth::user();
         $id = $user->id;
-        $qndtAmigos = UserRelation::where('user_from', '=', $id)->count();
+        $relations = UserRelation::where('user_from', '=', 38);
+        $qndtAmigos = $relations->count();
+        /* dd(\App\Models\PostComent::where('post_id', '=', 11)->get()); */
+        dd(\App\Models\Post::find(11)->posts_coments);
+        dd(\App\Models\Post::find(27)->posts_likes);
+        dd($relations->get()[0]->user_from);
+        
         
         return view('feed', [
             'quantidadeAmigos' => $qndtAmigos,

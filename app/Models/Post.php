@@ -12,6 +12,12 @@ class Post extends Model
         'body',
         'post_de'
     ];
+    public function posts_coments() {
+        return $this->hasMany(PostComent::class, 'post_id');
+    }
+    public function posts_likes() {
+        return $this->hasMany(PostLike::class);
+    }
     protected $table = 'posts';
     use HasFactory;
 }
