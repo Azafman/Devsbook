@@ -32,11 +32,16 @@ class UserController extends Controller
         $contador = 0;
         foreach ($posts as $post) {
             $posts[$contador]["coments"] = $post->posts_coments;
+            foreach($posts[$contador]["coments"] as $coment) {
+                $coment["autorComent"] = $coment->user;
+            }
             $posts[$contador]["likes"] = $post->posts_likes;
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
-        //dd($posts[1]); 
+        //dd($posts);
+        //dd($posts[1]["coments"][0]->user); 
+        //dd($posts[1]["coments"][0]->user->getAttribute("nome")); 
 
         return view('feed', [
             'name' => $user["name"],

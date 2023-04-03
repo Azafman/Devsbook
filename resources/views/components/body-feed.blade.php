@@ -1,3 +1,7 @@
+@php
+    //dd(count($posts[1]["coments"]));//DA CERTO!
+    //dd($posts[1]["likes"]);
+@endphp
 <main class="posts">
     <div class="item">
         <div class="feed-new-avatar itens">
@@ -15,7 +19,7 @@
         </div>
     </div>
     @for ($contador = 0; $contador < count($posts); $contador++)
-        <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}" />
+        <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}" :postComent="$posts[$contador]['coments']" :postLikes="$posts[$contador]['likes']" />
     @endfor
 </main>
 <div class="column side pl-5">
@@ -38,7 +42,3 @@
     </div>
 </div>
 
-@foreach ($posts as $post)
-    {{-- <x-posts postAuthor="{{$post["author"]["name"]}}" 
-    bodyPost="{{ $post["body"] }}" /> --}}
-@endforeach

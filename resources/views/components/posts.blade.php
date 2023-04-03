@@ -26,8 +26,8 @@
             {{ $bodyPost ?? '' }}
         </div>
         <div class="feed-item-buttons row mt-20 m-width-20">
-            <div class="like-btn on">56</div>
-            <div class="msg-btn">3</div>
+            <div class="like-btn on">{{count($postLikes)}}</div>
+            <div class="msg-btn">{{count($postComent)}}</div>
         </div>
         <div class="feed-item-comments">
             {{ $post ?? '' }}
