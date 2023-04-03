@@ -14,10 +14,9 @@
             <div class="feed-new-input" contenteditable="true"></div>
         </div>
     </div>
-
-    @foreach ($posts as $post)
-        <x-posts postAuthor="{{ $post[1] }}" bodyPost="{{ $post[2] }}" />
-    @endforeach
+    @for ($contador = 0; $contador < count($posts); $contador++)
+        <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}" />
+    @endfor
 </main>
 <div class="column side pl-5">
     <div class="box banners">
@@ -38,3 +37,8 @@
         </div>
     </div>
 </div>
+
+@foreach ($posts as $post)
+    {{-- <x-posts postAuthor="{{$post["author"]["name"]}}" 
+    bodyPost="{{ $post["body"] }}" /> --}}
+@endforeach

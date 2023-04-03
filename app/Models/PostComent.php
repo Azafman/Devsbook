@@ -14,4 +14,5 @@ class PostComent extends Model
         'body_coment'
     ];
     protected $table = 'posts_coments';
+    
 }
