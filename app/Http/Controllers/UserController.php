@@ -30,12 +30,16 @@ class UserController extends Controller
         //abaixo vou pegar os posts dos amigos desse usuário e seus respectivos comentários
         $posts = Post::whereIn('user_id', $idPost)->get();
         $contador = 0;
+
         foreach ($posts as $post) {
             $posts[$contador]["coments"] = $post->posts_coments;
             foreach($posts[$contador]["coments"] as $coment) {
                 $coment["autorComent"] = $coment->user;
             }
             $posts[$contador]["likes"] = $post->posts_likes;
+            foreach($posts[$contador]["likes"] as $postLike) {
+                $posts[$contador]["likes"]["autorLike"] = $postLike->user;
+            }
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
@@ -50,14 +54,3 @@ class UserController extends Controller
         ]);
     }
 }
-
-/*    $postsWithComents = DB::Table('posts')
-       ->select(['posts.id', 'users.name', 'posts.body', 'users.created_at'])
-       ->join('users', 'users.id', '=', 'posts.user_id')
-       ->whereIn('posts.id', $idPost)->get();
-
-   $coments = DB::table('posts_coments')
-       ->select(['posts_coments.body_coment', 'users.name', 'posts.id'])
-       ->join('posts', 'posts.id', '=', 'posts_coments.post_id')
-       ->join('users', 'users.id', '=', 'posts_coments.user_id')
-       ->whereIn('posts.id', $idPost)->get(); */

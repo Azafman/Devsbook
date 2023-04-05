@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="{{route('logoutUser')}}">
                     <div class="menu-item">
                         <div class="menu-item-icon">
                             <img src="assets/images/power.png" width="16" height="16" />
@@ -64,7 +64,7 @@
             <div class="modal-content"></div>
         </div>
     </div>
-    <script type="text/javascript" src="assets/js/script.js"></script>
-    <script type="text/javascript" src="assets/js/vanillaModal.js"></script>
+    {{-- <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript" src="assets/js/vanillaModal.js"></script> --}}
 </body>
 </html>
