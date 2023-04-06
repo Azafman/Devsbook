@@ -39,7 +39,7 @@
     </div>
     <div class="box">
         <div class="box-body m-10">
-            Criado com ❤️ por B7Web
+            Criado com ❤️ por AZ4F MATEUS
         </div>
     </div>
 </div>

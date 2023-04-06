@@ -53,4 +53,23 @@ class UserController extends Controller
             'posts' => $posts,
         ]);
     }
+    public function myProfile() {
+        $idUser = Auth::user();
+        $posts = Post::where('user_id', $idUser);
+        $amigos = UserRelation::where('user_id', $idUser);
+
+        return view('profile', [
+            'qtdAmigos' => $amigos->count(),
+            'myPosts' => $posts
+        ]);
+    }
+    public function myFriends() {
+        echo "myFriends";
+    }
+    public function myPhotos() {
+        echo "myPhotos";
+    }
+    public function config() {
+        echo "config my account";
+    }
 }
