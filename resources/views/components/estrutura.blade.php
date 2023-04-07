@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" data-link="none"/>
     <link rel="stylesheet" href="{{asset('assets/css/my-style.css')}}" data-link="none"/>
-    
+    <script type="text/javascript" src="../assets/js/select-page.js"></script>    
 </head>
-<body>
+<body onload="sayHello()">
     <x-header-all-pages nameUser="{{ $name ?? 'nome provisório' }}"/>
     <section class="container main">
         <aside class="mt-10">
             <nav>
-                <x-link-menu link="{{route('home')}}" class2="active" img="home-run" text="Home" />
+                <x-link-menu link="{{route('home')}}" class2="home" img="home-run" text="Home" />
 
-                <x-link-menu link="{{route('profile')}}" img="user" text="Meu Perfil" />
+                <x-link-menu link="{{route('profile')}}" class2="perfil" img="user" text="Meu Perfil" />
 
-                <x-link-menu link="{{route('friends')}}" img="friends" text="Amigos">
+                <x-link-menu link="{{route('friends')}}" class2="friends" img="friends" text="Amigos">
                     @slot('quantidadeAmigos')
                         <div class="menu-item-badge">
                             {{ $quantidadeAmigos }}
@@ -25,7 +25,7 @@
                     @endslot
                 </x-link-menu>
 
-                <x-link-menu link="{{route('photos')}}" img="photo" text="Fotos">
+                <x-link-menu link="{{route('photos')}}" class2="fotos" img="photo"  text="Fotos">
                     @slot('barra')
                         <div class='menu-splitter'></div>
                     @endslot
@@ -51,7 +51,7 @@
                             Sair
                         </div>
                     </div>
-                </a>ex
+                </a>
             </nav>
         </aside>
         {{$bodyFeed ?? ''}}
@@ -64,6 +64,6 @@
     </div>
     {{-- <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/vanillaModal.js"></script> --}}
-    <script type="text/javascript" src="{{asset('assets/js/select-page.js')}}"></script>
+    
 </body>
 </html>

@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user/logout', [AuthController::class, 'logout'])->name('logoutUser');
     Route::get('/user/perfil', [UserController::class, 'myProfile'])->name('profile');
     Route::get('/user/friends', [UserController::class, 'myFriends'])->name('friends');
-    Route::get('/user/photos', [UserController::class, 'myPhotos'])->name('photos');
+    Route::get('/user/fotos', [UserController::class, 'myPhotos'])->name('photos');
     Route::get('/user/configs', [UserController::class, 'config'])->name('configAcount');
 });
 

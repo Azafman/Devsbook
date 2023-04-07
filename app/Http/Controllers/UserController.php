@@ -18,7 +18,7 @@ class UserController extends Controller
         //dd(Auth::user()->id);
         $user = Auth::user();
         $id = $user->id;
-        $relations = UserRelation::where('user_from', '=', 38);
+        $relations = UserRelation::where('user_from', '=', $id);
         $qndtAmigos = $relations->count();
         $idPost = [];
         foreach ($relations->get() as $item) {
@@ -56,8 +56,9 @@ class UserController extends Controller
     public function myProfile() {
         $idUser = Auth::user(); 
         $user = User::find($idUser);
-        $posts = Post::where('user_id', $idUser);
-        $amigos = UserRelation::where('user_from', $idUser);
+        $posts = Post::whereIn('user_id', $idUser)->get();
+        $amigos = UserRelation::whereIn('user_from', $idUser);
+        //dd($amigos->get());
 
         return view('profile', [
             'qtdAmigos' => $amigos->count(),
