@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fotos;
 use App\Models\Post;
 use App\Models\PostComent;
 use App\Models\User;
@@ -13,12 +14,11 @@ use League\CommonMark\Extension\Table\Table;
 
 class UserController extends Controller
 {
-    public function home()
-    {
+    public function home(){
         //dd(Auth::user()->id);
         $user = Auth::user();
         $id = $user->id;
-        $relations = UserRelation::where('user_from', '=', $id);
+        $relations = UserRelation::where('seguindo', '=', $id);
         $qndtAmigos = $relations->count();
         $idPost = [];
         foreach ($relations->get() as $item) {
@@ -53,16 +53,35 @@ class UserController extends Controller
             'posts' => $posts,
         ]);
     }
+
     public function myProfile() {
         $idUser = Auth::user(); 
-        $user = User::find($idUser);
         $posts = Post::whereIn('user_id', $idUser)->get();
-        $amigos = UserRelation::whereIn('user_from', $idUser);
-        //dd($amigos->get());
+        $followOfThisUser = UserRelation::whereIn('seguindo', $idUser);
+        $thisUserFollow = UserRelation::whereIn('user_id', $idUser);
+        $userFotos = Fotos::whereIn('user_id', $idUser);
 
+
+        $contador = 0;
+        foreach ($posts as $post ) {
+            $posts[$contador]["coments"] = $post->posts_coments;
+            foreach($posts[$contador]["coments"] as $coment) {
+                $coment["authorComent"] = $coment->user;
+            }
+
+            $posts[$contador]["likes"] = $post->posts_likes;
+            foreach($posts[$contador]["likes"] as $postLike) {
+                $posts[$contador]["likes"]["authorLike"] = $postLike->user;
+            }
+
+            $posts[$contador]["author"] = $post->user;
+            $contador++;
+        }
         return view('profile', [
-            'qtdAmigos' => $amigos->count(),
-            'myPosts' => $posts
+            'user' => $idUser,
+            'qtdAmigos' => $thisUserFollow->count(),
+            'myPosts' => $posts, 
+            'fotos' => $userFotos
         ]);
     }
     public function myFriends() {
