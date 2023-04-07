@@ -54,9 +54,10 @@ class UserController extends Controller
         ]);
     }
     public function myProfile() {
-        $idUser = Auth::user();
+        $idUser = Auth::user(); 
+        $user = User::find($idUser);
         $posts = Post::where('user_id', $idUser);
-        $amigos = UserRelation::where('user_id', $idUser);
+        $amigos = UserRelation::where('user_from', $idUser);
 
         return view('profile', [
             'qtdAmigos' => $amigos->count(),
@@ -64,10 +65,10 @@ class UserController extends Controller
         ]);
     }
     public function myFriends() {
-        echo "myFriends";
+        return view('amigos');
     }
     public function myPhotos() {
-        echo "myPhotos";
+        return view('fotos');
     }
     public function config() {
         echo "config my account";

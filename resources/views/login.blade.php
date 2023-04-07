@@ -9,7 +9,11 @@
     <title>Login</title>
 </head>
 <body>
-    <x-login-main/>
+    <header>
+        <div class="container">
+            <a href="/"><img src="assets/images/devsbook_logo.png" /></a>
+        </div>
+    </header>
     {{-- <x-form.container-form msg="Não tem conta ? Crie Aqui" auth="/register" acao="Entrar"/> --}}
     <section class="container main">
         <form method="POST" action="{{route('loginAction')}}">

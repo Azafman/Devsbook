@@ -48,5 +48,7 @@ class User extends Authenticatable
     public function posts_coments() {
         return $this->hasMany(PostComent::class);
     }
-
+    public function users_relations(){
+        return $this->hasMany(UserRelation::class, 'user_from', 'id');
+    }
 }

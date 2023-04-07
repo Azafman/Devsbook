@@ -1,4 +1,3 @@
-
 <main class="posts">
     <div class="item">
         <div class="feed-new-avatar itens">
@@ -16,12 +15,8 @@
         </div>
     </div>
     @for ($contador = 0; $contador < count($posts); $contador++)
-        <x-posts
-          postAuthor="{{ $posts[$contador]['author']['name'] }}" 
-          bodyPost="{{ $posts[$contador]['body'] }}" 
-          :postData="$posts[$contador]['created_at']"
-         :postComent="$posts[$contador]['coments']" 
-         :postLikes="$posts[$contador]['likes']" />
+        <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}"
+            :postData="$posts[$contador]['created_at']" :postComent="$posts[$contador]['coments']" :postLikes="$posts[$contador]['likes']" />
     @endfor
 </main>
 <div class="column side pl-5">
@@ -43,4 +38,3 @@
         </div>
     </div>
 </div>
-

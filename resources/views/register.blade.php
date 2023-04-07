@@ -6,10 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/login.css">
 
-    <title>Cadastra-se</title>
+    <title>Cadastre-se</title>
 </head>
 <body>
-    <x-login-main/>
+    <header>
+        <div class="container">
+            <a href="/"><img src="assets/images/devsbook_logo.png" /></a>
+        </div>
+    </header>
     <section class="container main">
         <form method="POST" action="{{route('registerAction')}}">
             @csrf

@@ -1,6 +1,6 @@
 
 <a href="{{$link}}">
-    <div class="menu-item {{$class2 ?? ''}}">
+    <div class="menu-item {{$class2 ?? ''}} select-page">
         <div class="menu-item-icon">
             <img src="{{ asset('assets/images/' . $img . '.png') }}" width="16" height="16" />
         </div>
