@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" data-link="none"/>
     <link rel="stylesheet" href="{{asset('assets/css/my-style.css')}}" data-link="none"/>
-    <script type="text/javascript" src="../assets/js/select-page.js"></script>    
+    <link rel="stylesheet" href="{{asset('assets/css/upload-foto.css')}}">
 </head>
 <body onload="sayHello()">
     <x-header-all-pages nameUser="{{ $name ?? 'nome provisório' }}"/>
@@ -64,6 +64,6 @@
     </div>
     {{-- <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/vanillaModal.js"></script> --}}
-    
+    <script type="text/javascript" src="../assets/js/select-page.js"></script>    
 </body>
 </html>

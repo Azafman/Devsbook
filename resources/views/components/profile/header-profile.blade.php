@@ -3,7 +3,7 @@
         <div class="box-body">
             <div class="profile-cover" style="background-image: url({{asset('media/covers/cover.jpg')}});"></div>
             <div class="profile-info m-20 row">
-                <div class="profile-info-avatar">
+                <div class="profile-info-avatar profile-foto">
                     <img src="{{asset('media/avatars/avatar.jpg')}}" />
                 </div>
                 <div class="profile-info-name">
@@ -26,5 +26,20 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="upload-foto">
+    <div class="form">
+        <form action="" method="POST" >
+            <h3>Atualize sua Foto</h3>
+            <p>
+                Coloque sua foto de Perfil aqui: <br>
+            </p>
+            <input type="file" name="" id="" class="image">
+            <div class="finsh">
+                <input type="submit" value="Enviar" class="image" id="submit-img">
+                <button type="button" class="image changeState" >Fechar</button>
+            </div>
+        </form>
     </div>
 </div>

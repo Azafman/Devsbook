@@ -1,0 +1,65 @@
+.upload-foto {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, .4);
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    display: none;
+}
+.upload-foto-change {
+    display: flex !important;
+}
+.form {
+    width: 50%;
+    height: 40%;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #4A76A8;
+    border-radius: .6rem;
+}
+
+.form > form {
+    gap: 5px 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.form > form > p {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.form > form > h3 {
+    font-size: 2em;
+}
+.image {
+    background: rgb(0, 0, 0, .4);
+    border: none;
+    padding: 7.5px;
+    color: white;
+    border-radius: 2.5px;
+}
+.image:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.235);
+}
+
+@media (max-width: 900px) {
+    .form {
+        width: 75%;
+    }
+    input.image {
+        max-width: 80%;
+    }
+}

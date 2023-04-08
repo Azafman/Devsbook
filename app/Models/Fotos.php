@@ -9,6 +9,11 @@ class Fotos extends Model
 {
     use HasFactory;
     public $table = 'fotos';
+    public $fillable = [
+        'nome_arquivo', 
+        'type_foto',
+        'user_id'
+    ];
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
