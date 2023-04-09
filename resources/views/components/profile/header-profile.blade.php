@@ -30,12 +30,13 @@
 </div>
 <div class="upload-foto">
     <div class="form">
-        <form action="" method="POST" >
+        <form action="{{route('upload-img')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <h3>Atualize sua Foto</h3>
             <p>
                 Coloque sua foto de Perfil aqui: <br>
             </p>
-            <input type="file" name="" id="" class="image">
+            <input type="file" name="image" id="" class="image">
             <div class="finsh">
                 <input type="submit" value="Enviar" class="image" id="submit-img">
                 <button type="button" class="image changeState" >Fechar</button>

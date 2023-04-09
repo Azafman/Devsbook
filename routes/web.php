@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user/friends', [UserController::class, 'myFriends'])->name('friends');
     Route::get('/user/fotos', [UserController::class, 'myPhotos'])->name('photos');
     Route::get('/user/configs', [UserController::class, 'config'])->name('configAcount');
+    Route::post('/upload-img', [FotoController::class, 'uploadImg'])->name('upload-img');
 });
 
     
