@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,5 +30,3 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user/configs', [UserController::class, 'config'])->name('configAcount');
     Route::post('/upload-img', [FotoController::class, 'uploadImg'])->name('upload-img');
 });
-
-    

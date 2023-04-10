@@ -14,10 +14,12 @@ use League\CommonMark\Extension\Table\Table;
 
 class UserController extends Controller
 {
+    public static int $idUser;
     public function home(){
         //dd(Auth::user()->id);
         $user = Auth::user();
         $id = $user->id;
+        UserController::$idUser = $id;
         $relations = UserRelation::where('seguindo', '=', $id);
         $qndtAmigos = $relations->count();
         $idPost = [];
@@ -50,10 +52,9 @@ class UserController extends Controller
         return view('feed', [
             'name' => $user["name"],
             'quantidadeAmigos' => $qndtAmigos,
-            'posts' => $posts,
+            'posts' => $posts
         ]);
     }
-
     public function myProfile() {
         $idUser = Auth::user(); 
         $posts = Post::whereIn('user_id', $idUser)->get();
@@ -81,7 +82,8 @@ class UserController extends Controller
             'user' => $idUser,
             'qtdAmigos' => $thisUserFollow->count(),
             'myPosts' => $posts, 
-            'fotos' => $userFotos
+            'fotos' => $userFotos,
+            'pathImage' => FotoController::getProfilePicture()
         ]);
     }
     public function myFriends() {
