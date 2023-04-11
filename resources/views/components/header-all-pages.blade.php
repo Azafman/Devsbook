@@ -15,7 +15,7 @@
                 <a href="{{route('profile')}}" class="user-area">
                     <div class="user-area-text">{{$nameUser}}</div>
                     <div class="user-area-icon">
-                        <img src="{{asset('media/avatars/avatar.jpg')}}" />
+                        <img src="{{asset($pathImage)}}" />
                     </div>
                 </a>
                 <a href="{{route('logoutUser')}}" class="user-logout">

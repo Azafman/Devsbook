@@ -32,5 +32,8 @@ class FotoController extends Controller
 
         return redirect(route('profile'));
     }
+    public function updateImage() {
+        
+    }
     
 }

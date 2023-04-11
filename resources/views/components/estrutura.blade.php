@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/upload-foto.css')}}">
 </head>
 <body onload="sayHello()">
-    <x-header-all-pages nameUser="{{ $name ?? 'nome provisório' }}"/>
+    <x-header-all-pages nameUser="{{ $name ?? 'nome provisório' }}" pathImage="{{$pathImage}}"/>
     <section class="container main">
         <aside class="mt-10">
             <nav>

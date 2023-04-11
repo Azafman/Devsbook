@@ -15,10 +15,12 @@ use League\CommonMark\Extension\Table\Table;
 
 class UserController extends Controller
 {
-    public int $idUser;
+    static $user;
+
+    //pages
     public function home(){
         //dd(Auth::user()->id);
-        $user = Auth::user();
+        $user = self::getUserAuth();
         $id = $user->id;
         //UserController = $id;
         $relations = UserRelation::where('seguindo', '=', $id);
@@ -46,18 +48,16 @@ class UserController extends Controller
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
-        //dd($posts);
-        //dd($posts[1]["coments"][0]->user); 
-        //dd($posts[1]["coments"][0]->user->getAttribute("nome")); 
 
         return view('feed', [
             'name' => $user["name"],
             'quantidadeAmigos' => $qndtAmigos,
-            'posts' => $posts
+            'posts' => $posts,
+            'fotoPerfil' => UserController::getProfilePhoto($user)
         ]);
     }
     public function myProfile() {
-        $idUser = Auth::user(); 
+        $idUser = self::getUserAuth(); 
         $posts = Post::whereIn('user_id', $idUser)->get();
         $followOfThisUser = UserRelation::whereIn('seguindo', $idUser);
         $thisUserFollow = UserRelation::whereIn('user_id', $idUser);
@@ -79,32 +79,53 @@ class UserController extends Controller
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
-        $getPhotoProfile = DB::table('fotos')
-        ->select('caminho_imagem')
-        ->where([['type_foto', '=', 'perfil'], ['user_id', '=', $idUser->id]])
-        ->get();
-
-        try {
-            $getPhotoProfile = 'storage/images/'.$getPhotoProfile[0]->caminho_imagem;
-        }catch(Exception $e) {
-            $getPhotoProfile = 'media/avatars/avatar.jpg';
-        }
+        
 
         return view('profile', [
             'user' => $idUser,
             'qtdAmigos' => $thisUserFollow->count(),
             'myPosts' => $posts, 
             'fotos' => $userFotos,
-            'fotoPerfil' => $getPhotoProfile
+            'fotoPerfil' => UserController::getProfilePhoto($idUser)
         ]);
     }
     public function myFriends() {
-        return view('amigos');
+        return view('amigos', [
+            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
+        ]);
     }
     public function myPhotos() {
-        return view('fotos');
+        return view('fotos', [
+            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
+        ]);
     }
     public function config() {
         echo "config my account";
+    }
+
+    //functions normatials
+    public static function getProfilePhoto(User $user) {
+        $getPhotoProfile = DB::table('fotos')
+        ->select('caminho_imagem')
+        ->where([['type_foto', '=', 'perfil'], ['user_id', '=', $user->id]])
+        ->get();
+ 
+        try {
+            $getPhotoProfile = 'storage/images/'.$getPhotoProfile[0]->caminho_imagem;
+        }catch(Exception $e) {
+            $getPhotoProfile = 'media/avatars/avatar.jpg';
+        }
+        return $getPhotoProfile;
+    }
+    public static function getUserAuth() {
+        if(!self::$user) {
+            //self::nome variavel => é o que uso para acessar a variável estática dessa classe.
+            self::$user = Auth::user();
+        } 
+        return self::$user;
+    }
+    public static function closeUser() {
+        self::$user = null;
+        return true;
     }
 }
