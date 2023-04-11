@@ -1,11 +1,11 @@
+
 <div class="row">
     <div class="box flex-1 border-top-flat">
         <div class="box-body">
             <div class="profile-cover" style="background-image: url({{asset('media/covers/cover.jpg')}});"></div>
-            <div class="profile-cover" style="background-image: url({{asset($pathImage)}});"></div>
             <div class="profile-info m-20 row">
                 <div class="profile-info-avatar profile-foto">
-                    <img src="{{asset('media/avatars/avatar.jpg')}}" />
+                    <img src="{{asset($pathImage)}}" />
                 </div>
                 <div class="profile-info-name">
                     <div class="profile-info-name-text">Bonieky Lacerda</div>

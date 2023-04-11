@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostComent;
 use App\Models\User;
 use App\Models\UserRelation;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +15,12 @@ use League\CommonMark\Extension\Table\Table;
 
 class UserController extends Controller
 {
-    public static int $idUser;
+    public int $idUser;
     public function home(){
         //dd(Auth::user()->id);
         $user = Auth::user();
         $id = $user->id;
-        UserController::$idUser = $id;
+        //UserController = $id;
         $relations = UserRelation::where('seguindo', '=', $id);
         $qndtAmigos = $relations->count();
         $idPost = [];
@@ -78,12 +79,23 @@ class UserController extends Controller
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
+        $getPhotoProfile = DB::table('fotos')
+        ->select('caminho_imagem')
+        ->where([['type_foto', '=', 'perfil'], ['user_id', '=', $idUser->id]])
+        ->get();
+
+        try {
+            $getPhotoProfile = 'storage/images/'.$getPhotoProfile[0]->caminho_imagem;
+        }catch(Exception $e) {
+            $getPhotoProfile = 'media/avatars/avatar.jpg';
+        }
+
         return view('profile', [
             'user' => $idUser,
             'qtdAmigos' => $thisUserFollow->count(),
             'myPosts' => $posts, 
             'fotos' => $userFotos,
-            'pathImage' => FotoController::getProfilePicture()
+            'fotoPerfil' => $getPhotoProfile
         ]);
     }
     public function myFriends() {

@@ -2,7 +2,7 @@
 selectPage="my-person">
     @slot('bodyFeed')
         <section class="feed" style="position: relative;">
-            <x-profile.header-profile pathImage="{{$pathImage}}"/>
+            <x-profile.header-profile pathImage="{{$fotoPerfil}}"/>
 
             <x-profile.box-profile />
         </section>

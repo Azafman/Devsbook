@@ -25,18 +25,12 @@ class FotoController extends Controller
         $path = $r->file('image')->storeAs('public/images', $uniqueFileName);//salve the image in the repository setted, and returns the path of image
 
         $imageModel = new Fotos();
-        $imageModel->caminho_imagem = $path;
+        $imageModel->caminho_imagem = $uniqueFileName;
         $imageModel->type_foto = "perfil";
         $imageModel->user_id = Auth::user()->id;
         $imageModel->save();
 
         return redirect(route('profile'));
     }
-    public static function getProfilePicture() {
-        return DB::table('fotos')
-        ->select('caminho_imagem')
-        ->where('type_foto', '=', 'perfil')
-        ->where('user_id', '=', UserController::$idUser)
-        ->get();
-    }
+    
 }
