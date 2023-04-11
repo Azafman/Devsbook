@@ -1,7 +1,10 @@
-<x-estrutura quantidadeAmigos="{{ $quantidadeAmigos ?? 2 }}" name="{{ $name ?? '' }}" selectPage="fotos" pathImage="{{$fotoPerfil}}">
+<x-estrutura quantidadeAmigos="{{ $quantidadeAmigos ?? 2 }}" name="{{$user['name']}}"  selectPage="fotos" pathImage="{{$fotoPerfil}}">
     @slot('bodyFeed')
         <section class="feed">
-            <x-profile.header-profile pathImage="{{$fotoPerfil}}"/>
+            <x-profile.header-profile 
+            pathImage="{{$fotoPerfil}}"
+            name="{{$user['name']}}" 
+            city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"/>
 
             <x-profile.fotos.box-fotos />
         </section>

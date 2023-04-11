@@ -8,8 +8,8 @@
                     <img src="{{asset($pathImage)}}" />
                 </div>
                 <div class="profile-info-name">
-                    <div class="profile-info-name-text">Bonieky Lacerda</div>
-                    <div class="profile-info-location">Campina Grande</div>
+                    <div class="profile-info-name-text">{{$name}}</div>
+                    <div class="profile-info-location">{{$city}}</div>
                 </div>
                 <div class="profile-info-data row">
                     <div class="profile-info-item m-width-20">

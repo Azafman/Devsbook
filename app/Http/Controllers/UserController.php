@@ -50,7 +50,7 @@ class UserController extends Controller
         }
 
         return view('feed', [
-            'name' => $user["name"],
+            'user' => $user,
             'quantidadeAmigos' => $qndtAmigos,
             'posts' => $posts,
             'fotoPerfil' => UserController::getProfilePhoto($user)
@@ -91,11 +91,13 @@ class UserController extends Controller
     }
     public function myFriends() {
         return view('amigos', [
+            'user' => self::getUserAuth(),
             'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
         ]);
     }
     public function myPhotos() {
         return view('fotos', [
+            'user' => self::getUserAuth(),
             'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
         ]);
     }
@@ -127,5 +129,11 @@ class UserController extends Controller
     public static function closeUser() {
         self::$user = null;
         return true;
+    }
+    public static function getRelations() {
+        DB::table('users_relations')
+        ->select()
+        ->where(['user_id', '=', self::getUserAuth()])
+        ->get();
     }
 }

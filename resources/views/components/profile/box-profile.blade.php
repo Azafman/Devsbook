@@ -53,7 +53,7 @@
             <div class="box-body">
                 <div class="feed-item-head row mt-20 m-width-20">
                     <div class="feed-item-head-photo">
-                        <a href=""><img src="{{asset('media/avatars/avatar.jpg')}}" /></a>
+                        <a href=""><img src="{{asset($pathImage)}}" /></a>
                     </div>
                     <div class="feed-item-head-info">
                         <a href=""><span class="fidi-name">Mateus Azaf</span></a>
