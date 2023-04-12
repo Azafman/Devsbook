@@ -29,4 +29,5 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user/fotos', [UserController::class, 'myPhotos'])->name('photos');
     Route::get('/user/configs', [UserController::class, 'config'])->name('configAcount');
     Route::post('/upload-img', [FotoController::class, 'uploadImg'])->name('upload-img');
+    Route::post('/delete-img', [FotoController::class, 'deleteImg'])->name('delete-img');
 });

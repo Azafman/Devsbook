@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\DB;
 class FotoController extends Controller
 {
     public function uploadImg(Request $r){
+        //dd($r->only(['perfil-or-cover'])); confere -- tudo ok!
         $this->validate($r, [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         /*A função recebe um objeto Request como parâmetro, que contém as informações da imagem a ser carregada. A primeira linha do código obtém o arquivo de imagem do objeto Request usando o método file().
         $image = $request->file('image');*/
+        $typeImage = $r->only(['perfil-or-cover']);
         $image = $r->file('image'); //file('name of input')
 
         /* O nome original do arquivo é obtido usando o método getClientOriginalName(): */
@@ -26,14 +28,21 @@ class FotoController extends Controller
 
         $imageModel = new Fotos();
         $imageModel->caminho_imagem = $uniqueFileName;
-        $imageModel->type_foto = "perfil";
+        if($typeImage === 'profile-foto') {
+            $typeImage = 'perfil';
+        } else if($typeImage === 'cover') {
+            $typeImage = 'cover';
+        } else {
+            $typeImage = 'post';
+        }
+        $imageModel->type_foto = $typeImage;
         $imageModel->user_id = Auth::user()->id;
         $imageModel->save();
 
         return redirect(route('profile'));
     }
-    public function updateImage() {
-        
+    public function deleteImg(Request $r) {
+        dd("delete!");
     }
     
 }

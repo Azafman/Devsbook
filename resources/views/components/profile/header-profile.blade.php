@@ -2,7 +2,7 @@
 <div class="row">
     <div class="box flex-1 border-top-flat">
         <div class="box-body">
-            <div class="profile-cover fundo" style="background-image: url({{asset('media/covers/cover.jpg')}});"></div>
+            <div class="profile-cover fundo cover-fundo" style="background-image: url({{asset('media/covers/cover.jpg')}});"></div>
             <div class="profile-info m-20 row">
                 <div class="profile-info-avatar profile-foto fundo">
                     <img src="{{asset($pathImage)}}" />
@@ -38,9 +38,12 @@
                 Coloque sua foto de Perfil aqui: <br>
             </p>
             <input type="file" name="image" id="" class="image">
+            <input type="hidden" name="perfil-or-cover" value="undefined">
+            <input type="hidden" name="idOfThisUser" value="{{$idOfThisUser}}">
             <div class="finsh">
                 <input type="submit" value="Enviar" class="image" id="submit-img">
                 <button type="button" class="image changeState" >Fechar</button>
+                <button type="button" class="image changeState delete" >Deletar Foto</button>
             </div>
         </form>
     </div>

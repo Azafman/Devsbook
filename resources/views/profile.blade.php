@@ -5,7 +5,7 @@ selectPage="my-person" pathImage="{{$fotoPerfil}}">
             <x-profile.header-profile 
             pathImage="{{$fotoPerfil}}" name="{{$user['name']}}" 
             city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
-            :relations="$relations"
+            :relations="$relations" idOfThisUser="{{$user['id']}}"
             />
 
             <x-profile.box-profile pathImage="{{$fotoPerfil}}"/>

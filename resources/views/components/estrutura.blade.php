@@ -17,7 +17,7 @@
 
                 <x-link-menu link="{{route('profile')}}" class2="perfil" img="user" text="Meu Perfil" />
 
-                <x-link-menu link="{{route('friends')}}" class2="friends" img="friends" text="Amigos">
+                <x-link-menu link="{{route('friends')}}" class2="friends" img="friends" text="Seguindo">
                     @slot('quantidadeAmigos')
                         <div class="menu-item-badge">
                             {{ $quantidadeAmigos }}
