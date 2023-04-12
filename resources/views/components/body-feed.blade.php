@@ -1,7 +1,7 @@
 <main class="posts">
     <div class="item">
         <div class="feed-new-avatar itens">
-            <img src="media/avatars/avatar.jpg" />
+            <img src="{{asset($pathImage)}}" />
         </div>
 
         <div class="feed-new-input-placeholder itens">O que você está pensando, Bonieky?</div>

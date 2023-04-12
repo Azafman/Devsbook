@@ -18,7 +18,7 @@ const changeClassOfElement = (url) => {
 }
 const elementForChange = document.querySelector('.upload-foto');
 
-document.querySelector('.profile-foto').addEventListener('click', toggleModal);
+document.querySelectorAll('.fundo').forEach((el) => el.addEventListener('click', toggleModal));
 document.querySelector('.changeState').addEventListener('click', toggleModal); 
 function toggleModal() {
     elementForChange.classList.toggle('upload-foto-change');

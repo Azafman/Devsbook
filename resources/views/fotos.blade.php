@@ -4,7 +4,8 @@
             <x-profile.header-profile 
             pathImage="{{$fotoPerfil}}"
             name="{{$user['name']}}" 
-            city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"/>
+            city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
+            :relations="$relations"/>
 
             <x-profile.fotos.box-fotos />
         </section>

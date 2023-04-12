@@ -19,7 +19,7 @@ class UserController extends Controller
 
     //pages
     public function home(){
-        //dd(Auth::user()->id);
+
         $user = self::getUserAuth();
         $id = $user->id;
         //UserController = $id;
@@ -53,7 +53,7 @@ class UserController extends Controller
             'user' => $user,
             'quantidadeAmigos' => $qndtAmigos,
             'posts' => $posts,
-            'fotoPerfil' => UserController::getProfilePhoto($user)
+            'fotoPerfil' => UserController::getProfilePhoto($user),
         ]);
     }
     public function myProfile() {
@@ -62,7 +62,6 @@ class UserController extends Controller
         $followOfThisUser = UserRelation::whereIn('seguindo', $idUser);
         $thisUserFollow = UserRelation::whereIn('user_id', $idUser);
         $userFotos = Fotos::whereIn('user_id', $idUser);
-
 
         $contador = 0;
         foreach ($posts as $post ) {
@@ -80,28 +79,32 @@ class UserController extends Controller
             $contador++;
         }
         
-
         return view('profile', [
             'user' => $idUser,
             'qtdAmigos' => $thisUserFollow->count(),
             'myPosts' => $posts, 
             'fotos' => $userFotos,
-            'fotoPerfil' => UserController::getProfilePhoto($idUser)
+            'fotoPerfil' => UserController::getProfilePhoto($idUser),
+            'relations' => UserController::getRelations()
         ]);
     }
     public function myFriends() {
         return view('amigos', [
             'user' => self::getUserAuth(),
-            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
+            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth()),
+            'relations' => UserController::getRelations()
         ]);
     }
     public function myPhotos() {
+
         return view('fotos', [
             'user' => self::getUserAuth(),
-            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth())
+            'fotoPerfil' => UserController::getProfilePhoto(self::getUserAuth()),
+            'relations' => UserController::getRelations()
         ]);
     }
     public function config() {
+        
         echo "config my account";
     }
 
@@ -131,9 +134,11 @@ class UserController extends Controller
         return true;
     }
     public static function getRelations() {
-        DB::table('users_relations')
-        ->select()
-        ->where(['user_id', '=', self::getUserAuth()])
-        ->get();
+        $followers = [
+            UserRelation::where([['user_id', '=', self::getUserAuth()->id]])->count(),
+            UserRelation::where([['seguindo', '=', self::getUserAuth()->id]])->count(),
+        ];
+
+        return $followers;
     }
 }

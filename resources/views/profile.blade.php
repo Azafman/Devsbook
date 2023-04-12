@@ -4,7 +4,9 @@ selectPage="my-person" pathImage="{{$fotoPerfil}}">
         <section class="feed" style="position: relative;">
             <x-profile.header-profile 
             pathImage="{{$fotoPerfil}}" name="{{$user['name']}}" 
-            city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"/>
+            city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
+            :relations="$relations"
+            />
 
             <x-profile.box-profile pathImage="{{$fotoPerfil}}"/>
         </section>
