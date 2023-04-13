@@ -19,29 +19,14 @@ const changeClassOfElement = (url) => {
 
 const elementForChange = document.querySelector('.upload-foto');
 const elementsWithImage = document.querySelectorAll('.fundo');
-const deleteImage = document.querySelector('.delete');
-let input;
+let input = document.querySelector('[name="perfil-or-cover"]');
 
-const deleteImg = async () => {
-    const domain = window.location.host;
-    const urlForRequest = domain + '/deleteImg/';
-    const idUser = document.querySelector('[name="idOfThisUser"]').value;
-
-    let $rawResult = await fetch('', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'accept': 'application/json'
-        },
-        body: JSON.stringify({ idUser, _token: '{{ $csrf_token()}}' })
-    })
-};
 
 function toggleModal(element = null) {
     input = document.querySelector('[name="perfil-or-cover"]');
 
     if (element.classList.contains("profile-foto")) {
-        input.value = 'profile';
+        input.value = 'perfil';
     } else if (element.classList.contains("cover-fundo")) {
         input.value = 'cover';
     }
@@ -50,26 +35,33 @@ function toggleModal(element = null) {
     }
     elementForChange.classList.toggle('upload-foto-change');
 }
+const deleteImage = document.querySelector('.delete');
+const deleteImg = async () => {
+    const domain = window.location.host;
+    const urlForRequest = 'http://' + domain + '/delete-img';
+    const idUser = document.querySelector('[name="idOfThisUser"]').value;
+    const typeDelete = input.value;
+
+    console.log(urlForRequest);
+
+    let rawResult = await fetch(urlForRequest, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
+            idUser,
+            typeDelete,
+            _token: window.csrf_token
+        })
+    })
+    
+    let result = await rawResult.json();
+    console.log(result[0]);
+};
+
 
 elementsWithImage.forEach((el) => el.addEventListener('click', () => toggleModal(el)));
 document.querySelector('.changeState').addEventListener('click', (el) => toggleModal(el.target));
 deleteImage.addEventListener('click', deleteImg);
-
-/* 
-let rawResult = await fetch('{{ route('task.update') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'accept': 'application/json'
-                },
-                body: JSON.stringify({stateOfElement, idOfElement, _token: '{{ csrf_token() }}'
-                })
-                const result = await rawResult.json();//espera a resposta da requisicao
-            if(!result.sucess) {
-                element.checked = !element.checked;
-                //poderia criar uma função informando que o bd não está funcionando ou algo assim
-            } else {
-                alert("Tarefa atualizada com Sucesso. Parabéns, rumo a constância!");
-            }
-
- */

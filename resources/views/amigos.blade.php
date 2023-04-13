@@ -6,7 +6,8 @@ selectPage="amigos" pathImage="{{$fotoPerfil}}">
             pathImage="{{$fotoPerfil}}" 
             name="{{$user['name']}}" 
             city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
-            :relations="$relations"/>
+            :relations="$relations"
+            idOfThisUser="{{ $user['id'] }}"/>
 
             <x-profile.box-amigos />
         </section>

@@ -28,9 +28,9 @@ class FotoController extends Controller
 
         $imageModel = new Fotos();
         $imageModel->caminho_imagem = $uniqueFileName;
-        if($typeImage === 'profile-foto') {
+        if($typeImage['perfil-or-cover'] === 'perfil') {
             $typeImage = 'perfil';
-        } else if($typeImage === 'cover') {
+        } else if($typeImage['perfil-or-cover'] === 'cover') {
             $typeImage = 'cover';
         } else {
             $typeImage = 'post';
@@ -42,7 +42,25 @@ class FotoController extends Controller
         return redirect(route('profile'));
     }
     public function deleteImg(Request $r) {
-        dd("delete!");
+        $requestData = $r->only(['idUser', 'typeDelete']);
+        
+
+        $deleted = Fotos::where([['user_id','=', $requestData['idUser']], ['type_foto', '=', $requestData['typeDelete']]]);
+
+        $this->deleteOfServer($deleted->get()[0]);
+
+        return redirect()->route('profile');
+    }
+    private  function deleteOfServer(Fotos $ft) {
+        $imagemPath = public_path('storage/images/' . $ft['caminho_imagem']);
+
+        if(file_exists($imagemPath)) {
+            unlink($imagemPath);
+            $ft->delete();
+            return true;
+        }
+
+        return false;
     }
     
 }

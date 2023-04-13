@@ -5,7 +5,8 @@
             pathImage="{{$fotoPerfil}}"
             name="{{$user['name']}}" 
             city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
-            :relations="$relations"/>
+            :relations="$relations"
+            idOfThisUser="{{ $user['id'] }}"/>
 
             <x-profile.fotos.box-fotos />
         </section>
