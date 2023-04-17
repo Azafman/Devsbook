@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fotos;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,27 +44,32 @@ class FotoController extends Controller
     }
     public function deleteImg(Request $r) {
         $requestData = $r->only(['idUser', 'typeDelete']);
-        
+
 
         $deleted = Fotos::where([['user_id','=', $requestData['idUser']], ['type_foto', '=', $requestData['typeDelete']]]);
 
-        $this->deleteOfServer($deleted->get()[0]);
+        if(!$this->deleteOfServer($deleted->get()[0])){
+            redirect()->route('profile');
+            return response()->json('Error - Image does not exist');
+        }
 
-        return redirect()->route('profile');
+        redirect(route('profile'));
+
+        return response()->json('sucess - success - successfully deleted image');
     }
-    public function updateImg(Request $r) {
-    }
+    
     private function deleteOfServer(Fotos $ft) {
-        $imagemPath = public_path('storage/images/' . $ft['caminho_imagem']);
+        try {
+            $imagemPath = public_path('storage/images/' . $ft['caminho_imagem']);
+        } catch (Exception $e) {
+            return false;
+        }
 
         if(file_exists($imagemPath)) {
             unlink($imagemPath);
             $ft->delete();
             return true;
-        }
-
+        } 
         return false;
-    }
-
-    
+    }    
 }

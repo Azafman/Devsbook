@@ -4,7 +4,8 @@
         <section class="feed" style="position: relative;">
             <x-profile.header-profile pathImage="{{ $fotoPerfil }}" name="{{ $user['name'] }}"
                 city="{{ $user['cidade'] ?? 'Nenhuma cidade' }}" :relations="$relations"  
-                idOfThisUser="{{ $user['id'] }}"/>
+                idOfThisUser="{{ $user['id'] }}"
+                pathCover="{{$fotoCover ?? 'media/covers/cover.png'}}"/>
 
             <x-profile.box-profile pathImage="{{ $fotoPerfil }}" />
         </section>

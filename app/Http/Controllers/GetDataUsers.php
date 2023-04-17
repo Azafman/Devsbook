@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fotos;
 use App\Models\User;
 use App\Models\UserRelation;
 use Exception;
@@ -16,6 +17,7 @@ class GetDataUsers extends Controller
     //functions normatials
     public static function getProfilePhoto(User $user, string $type = "perfil")
     {
+        
         $getPhotoProfile = DB::table('fotos')
             ->select('caminho_imagem')
             ->where([['type_foto', '=', $type], ['user_id', '=', $user->id]])
@@ -24,10 +26,15 @@ class GetDataUsers extends Controller
         try {
             $getPhotoProfile = 'storage/images/' . $getPhotoProfile[0]->caminho_imagem;
         } catch (Exception $e) {
+            if ($type === "cover") {
+                $getPhotoProfile = 'media/covers/cover.jpg';
+                return $getPhotoProfile;
+            }
             $getPhotoProfile = 'media/avatars/avatar.jpg';
         }
         return $getPhotoProfile;
     }
+
     public static function getUserAuth()
     {
         if (!self::$user) {
@@ -38,7 +45,6 @@ class GetDataUsers extends Controller
     }
     public static function closeUser()
     {
-
         self::$user = null;
         return true;
     }

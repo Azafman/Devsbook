@@ -32,6 +32,7 @@ class UserController extends Controller
     }
     public function myProfile()
     {
+
         $idUser = GetDataUsers::getUserAuth();
         $relations = GetDataUsers::getRelations();
 
@@ -41,7 +42,8 @@ class UserController extends Controller
             'myPosts' => self::getPosts([$idUser]),
             'fotos' => Fotos::whereIn('user_id', $idUser)->get(),
             'fotoPerfil' => GetDataUsers::getProfilePhoto($idUser),
-            'relations' => $relations
+            'relations' => $relations,
+            'fotoCover' => GetDataUsers::getProfilePhoto(GetDataUsers::getUserAuth(), "cover")
         ]);
     }
     public function myFriends()
@@ -49,7 +51,8 @@ class UserController extends Controller
         return view('amigos', [
             'user' => GetDataUsers::getUserAuth(),
             'fotoPerfil' => GetDataUsers::getProfilePhoto(GetDataUsers::getUserAuth()),
-            'relations' => GetDataUsers::getRelations()
+            'relations' => GetDataUsers::getRelations(),
+            'fotoCover' => GetDataUsers::getProfilePhoto(GetDataUsers::getUserAuth(), "cover")
         ]);
     }
     public function myPhotos()
@@ -57,7 +60,8 @@ class UserController extends Controller
         return view('fotos', [
             'user' => GetDataUsers::getUserAuth(),
             'fotoPerfil' => GetDataUsers::getProfilePhoto(GetDataUsers::getUserAuth()),
-            'relations' => GetDataUsers::getRelations()
+            'relations' => GetDataUsers::getRelations(),
+            'fotoCover' => GetDataUsers::getProfilePhoto(GetDataUsers::getUserAuth(), "cover")
         ]);
     }
     public function config()

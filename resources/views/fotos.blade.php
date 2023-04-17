@@ -6,7 +6,8 @@
             name="{{$user['name']}}" 
             city="{{$user['cidade'] ?? 'Nenhuma cidade'}}"
             :relations="$relations"
-            idOfThisUser="{{ $user['id'] }}"/>
+            idOfThisUser="{{ $user['id'] }}"
+            pathCover="{{$fotoCover ?? 'media/covers/cover.png'}}"/>
 
             <x-profile.fotos.box-fotos />
         </section>

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="box flex-1 border-top-flat">
         <div class="box-body">
-            <div class="profile-cover fundo cover-fundo" style="background-image: url({{asset('media/covers/cover.jpg')}});"></div>
+            <div class="profile-cover fundo cover-fundo" style="background-image: url({{asset($pathCover)}});"></div>
             <div class="profile-info m-20 row">
                 <div class="profile-info-avatar profile-foto fundo">
                     <img src="{{asset($pathImage)}}" />

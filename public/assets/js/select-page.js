@@ -25,6 +25,7 @@ let input = document.querySelector('[name="perfil-or-cover"]');
 function toggleModal(element = null) {
     input = document.querySelector('[name="perfil-or-cover"]');
 
+    window.location.href
     if (element.classList.contains("profile-foto")) {
         input.value = 'perfil';
     } else if (element.classList.contains("cover-fundo")) {
@@ -42,8 +43,6 @@ const deleteImg = async () => {
     const idUser = document.querySelector('[name="idOfThisUser"]').value;
     const typeDelete = input.value;
 
-    console.log(urlForRequest);
-
     let rawResult = await fetch(urlForRequest, {
         method: 'POST',
         headers: {
@@ -57,10 +56,10 @@ const deleteImg = async () => {
         })
     })
     
+    window.location.href = window.location.href;
     let result = await rawResult.json();
-    console.log(result[0]);
+    
 };
-
 
 elementsWithImage.forEach((el) => el.addEventListener('click', () => toggleModal(el)));
 document.querySelector('.changeState').addEventListener('click', (el) => toggleModal(el.target));
