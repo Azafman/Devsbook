@@ -51,7 +51,9 @@ class FotoController extends Controller
 
         return redirect()->route('profile');
     }
-    private  function deleteOfServer(Fotos $ft) {
+    public function updateImg(Request $r) {
+    }
+    private function deleteOfServer(Fotos $ft) {
         $imagemPath = public_path('storage/images/' . $ft['caminho_imagem']);
 
         if(file_exists($imagemPath)) {
@@ -62,5 +64,6 @@ class FotoController extends Controller
 
         return false;
     }
+
     
 }
