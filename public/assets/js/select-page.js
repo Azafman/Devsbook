@@ -56,7 +56,7 @@ const deleteImg = async () => {
         })
     })
     
-    window.location.href = window.location.href;
+    window.location.href = window.location.href;//reload page
     let result = await rawResult.json();
     
 };
