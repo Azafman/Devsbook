@@ -42,7 +42,7 @@ const deleteImg = async () => {
     const urlForRequest = 'http://' + domain + '/delete-img';
     const idUser = document.querySelector('[name="idOfThisUser"]').value;
     const typeDelete = input.value;
-
+    console.log(urlForRequest);
     let rawResult = await fetch(urlForRequest, {
         method: 'POST',
         headers: {
@@ -58,6 +58,7 @@ const deleteImg = async () => {
     
     window.location.href = window.location.href;//reload page
     let result = await rawResult.json();
+    
     
 };
 

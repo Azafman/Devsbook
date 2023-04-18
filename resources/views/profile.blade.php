@@ -11,4 +11,3 @@
         </section>
     @endslot
 </x-estrutura>
-<script src="{{ asset('assets/js/upload-img.js') }}"></script>

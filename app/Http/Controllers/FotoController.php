@@ -39,25 +39,28 @@ class FotoController extends Controller
         $imageModel->type_foto = $typeImage;
         $imageModel->user_id = GetDataUsers::getUserAuth()->id;
 
-        $imageModel->save();
         $this->updateImage($imageModel);
-        return redirect($r->url()); //reload
+        $imageModel->save();
+        return redirect()->route('profile'); //reload
     }
     public function deleteImg(Request $r)
     {
         $requestData = $r->only(['idUser', 'typeDelete']);
 
 
-        $deleted = Fotos::where([['user_id', '=', $requestData['idUser']], ['type_foto', '=', $requestData['typeDelete']]]);
+        try {
+            $deleted = Fotos::where([
+                ['user_id', '=', $requestData['idUser']], 
+                ['type_foto', '=', $requestData['typeDelete']]])->get()[0];
+        } catch (Exception $e) {
+            $deleted = new Fotos; 
+        }
 
-        if (!$this->deleteOfServer($deleted->get())) {
-            redirect()->route('profile');
+        if (!$this->deleteOfServer($deleted)) {
             return response()->json('Error - Image does not exist');
         }
 
-        redirect(route('profile'));
-
-        return response()->json('sucess - success - successfully deleted image');
+        return response()->json('sucess - successfully deleted image');
     }
     private function deleteOfServer(Fotos $ft)
     {
@@ -76,18 +79,14 @@ class FotoController extends Controller
     }
     private function updateImage(Fotos $foto)
     {
-        //dd($foto->user_id);
         $fotoDb = Fotos::where([
             ['user_id', '=', $foto->user_id],
             ['type_foto', '=', $foto->type_foto]
         ])->get();
         //dd(count($fotoDb)); == 0
 
-        if (count($fotoDb) !== 0) {
-            return $this->deleteOfServer(Fotos::where([
-                ['user_id', '=', $fotoDb->user_id],
-                ['type_foto', '=', $fotoDb->type_foto]
-            ]));
+        if (count($fotoDb) !== 0) {                
+            return $this->deleteOfServer($fotoDb[0]);
         }
         return true;
     }
