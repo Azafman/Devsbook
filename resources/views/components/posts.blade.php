@@ -12,11 +12,11 @@
                 </span></a>
             <span class="fidi-action">fez um post</span>
             <br />
-            <span class="fidi-date"> 
-                @php
+            <span class="fidi-date">
+                 @php
                     $carbonDate = Carbon::createFromDate($postData);
                     echo $carbonDate->format('d \d\e F \D\e Y');
-                @endphp
+                @endphp 
             </span>
         </div>
         <div class="feed-item-head-btn">
@@ -33,10 +33,10 @@
     <div class="feed-item-comments">
         {{ $post ?? '' }}
         @foreach ($postComent as $pst)
-            <x-coment-post authorComent="{{$pst['autorComent']['name']}}" bodyComent="{{$pst['body_coment']}}" />
+            <x-coment-post authorComent="{{ $pst['autorComent']['name'] }}" bodyComent="{{ $pst['body_coment'] }}" />
         @endforeach
 
-        <div class="fic-answer row m-height-10 m-width-20 icn">
+        <div class="fic-answer row m-height-10  m-width-20 icn">
             <div class="fic-item-photo">
                 <a href=""><img src="media/avatars/avatar.jpg" /></a>
             </div>

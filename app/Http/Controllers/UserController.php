@@ -32,14 +32,13 @@ class UserController extends Controller
     }
     public function myProfile()
     {
-
         $idUser = GetDataUsers::getUserAuth();
         $relations = GetDataUsers::getRelations();
 
         return view('profile', [
             'user' => $idUser,
             'qtdAmigos' => $relations[0],
-            'myPosts' => self::getPosts([$idUser]),
+            'myPosts' => self::getPosts([$idUser->id]),
             'fotos' => Fotos::whereIn('user_id', $idUser)->get(),
             'fotoPerfil' => GetDataUsers::getProfilePhoto($idUser),
             'relations' => $relations,
@@ -72,7 +71,7 @@ class UserController extends Controller
 
     private static function getPosts(array $idPost) {
         $posts = Post::whereIn('user_id', $idPost)->get();
-
+        
         $contador = 0;
         foreach ($posts as $post) {
             $posts[$contador]["coments"] = $post->posts_coments;
@@ -86,7 +85,7 @@ class UserController extends Controller
             $posts[$contador]["author"] = $post->user;
             $contador++;
         }
-
+        //dd($posts);
         return $posts;
     }
 }

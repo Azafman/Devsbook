@@ -1,6 +1,6 @@
 <main class="posts">
-    <div class="item">
-        <div class="feed-new-avatar itens">
+    <div class="feed-new-avatar itens">
+            <div class="item">
             <img src="{{asset($pathImage)}}" />
         </div>
 

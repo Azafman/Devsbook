@@ -10,7 +10,7 @@ class Post extends Model
     protected $fillable = [
         'type',
         'body',
-        'post_de'
+        'user_id'
     ];
     public function posts_coments() {
         return $this->hasMany(PostComent::class, 'post_id', 'id');
