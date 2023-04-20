@@ -51,4 +51,7 @@ class User extends Authenticatable
     public function users_relations(){
         return $this->hasMany(UserRelation::class, 'user_from', 'id');
     }
+    public function fotos() {
+        return $this->hasMany(Fotos::class, 'user_id', 'id');
+    }
 }

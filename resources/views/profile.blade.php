@@ -1,6 +1,4 @@
-{{-- @php
-    dd($myPosts);
-@endphp --}}
+{{-- @dd($myPosts[0]["fotoPerfil"][1]["caminho_imagem"]) --}}
 <x-estrutura quantidadeAmigos="{{ $quantidadeAmigos ?? 2 }}" name="{{ $user['name'] ?? '' }}" selectPage="my-person"
     pathImage="{{ $fotoPerfil }}">
     @slot('bodyFeed')

@@ -1,18 +1,19 @@
 <main class="posts">
-    <div class="feed-new-avatar itens">
-            <div class="item">
-            <img src="{{asset($pathImage)}}" />
+    <div class="item">
+        <div class="feed-new-avatar itens">
+            <img src="{{ asset($pathImage) }}" />
         </div>
+    
 
-        <div class="feed-new-input-placeholder itens">O que você está pensando, Bonieky?</div>
+    <div class="feed-new-input-placeholder itens">O que você está pensando, Bonieky?</div>
 
-        <div class="feed-new-send itens">
-            <img src="assets/images/send.png" />
-        </div>
+    <div class="feed-new-send itens">
+        <img src="assets/images/send.png" />
+    </div>
 
-        <div class="feed-new-editor m-10 row itens">
-            <div class="feed-new-input" contenteditable="true"></div>
-        </div>
+    <div class="feed-new-editor m-10 row itens">
+        <div class="feed-new-input" contenteditable="true"></div>
+    </div>
     </div>
     @for ($contador = 0; $contador < count($posts); $contador++)
         <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}"

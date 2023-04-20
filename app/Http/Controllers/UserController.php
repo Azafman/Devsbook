@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fotos;
 use App\Models\Post;
 use App\Models\UserRelation;
-
+use Illuminate\Database\Eloquent\Collection;
 
 class UserController extends Controller
 {
@@ -78,14 +78,21 @@ class UserController extends Controller
             foreach ($posts[$contador]["coments"] as $coment) {
                 $coment["autorComent"] = $coment->user;
             }
+
             $posts[$contador]["likes"] = $post->posts_likes;
             foreach ($posts[$contador]["likes"] as $postLike) {
                 $posts[$contador]["likes"]["autorLike"] = $postLike->user;
             }
+            
             $posts[$contador]["author"] = $post->user;
+            $posts[$contador]["fotoPerfil"] = self::getFotoPerfilOfAPost($post->user->fotos);
             $contador++;
         }
         //dd($posts);
         return $posts;
+    }
+
+    private static function getFotoPerfilOfAPost(Collection $fotos) {
+        return $fotos->where('type_foto', '=', 'perfil');
     }
 }
