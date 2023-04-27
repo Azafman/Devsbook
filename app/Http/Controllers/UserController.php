@@ -16,7 +16,6 @@ class UserController extends Controller
         $user = GetDataUsers::getUserAuth();
         $id = $user->id;
         $relations = UserRelation::where('seguindo', '=', $id);
-        $qndtAmigos = $relations->count();
         $idPost = [];
         foreach ($relations->get() as $item) {
             array_push($idPost, $item->getAttribute('user_id'));
@@ -25,7 +24,7 @@ class UserController extends Controller
 
         return view('feed', [
             'user' => $user,
-            'quantidadeAmigos' => $qndtAmigos,
+            'relations' => GetDataUsers::getRelations(),
             'posts' => self::getPosts($idPost),
             'fotoPerfil' => GetDataUsers::getProfilePhoto($user),
         ]);
@@ -37,7 +36,6 @@ class UserController extends Controller
 
         return view('profile', [
             'user' => $idUser,
-            'qtdAmigos' => $relations[0],
             'myPosts' => self::getPosts([$idUser->id]),
             'fotos' => Fotos::whereIn('user_id', $idUser)->get(),
             'fotoPerfil' => GetDataUsers::getProfilePhoto($idUser),
@@ -81,14 +79,13 @@ class UserController extends Controller
 
             $posts[$contador]["likes"] = $post->posts_likes;
             foreach ($posts[$contador]["likes"] as $postLike) {
-                $posts[$contador]["likes"]["autorLike"] = $postLike->user;
+                $postLike["autorLike"] = $postLike->user;
             }
-            
+
             $posts[$contador]["author"] = $post->user;
             $posts[$contador]["fotoPerfil"] = self::getFotoPerfilOfAPost($post->user->fotos);
             $contador++;
         }
-        //dd($posts);
         return $posts;
     }
 

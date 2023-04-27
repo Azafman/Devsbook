@@ -4,9 +4,9 @@
 
         <div class="box">
             <div class="box-body">
-                <x-profile.perfil.informacao txt="01/01/1930 (90 anos)" img="calendar" />
-                <x-profile.perfil.informacao txt="Campina Grande, Brasil" img="pin" />
-                <x-profile.perfil.informacao txt="B7Web" img="work" />
+                <x-profile.perfil.informacao txt="{{$user['data_nascimento'] ?? 'sem data de nascimento'}}" img="calendar" />
+                <x-profile.perfil.informacao txt="{{$user['cidade'] ?? 'Nenhuma cidade registrada'}}" img="pin" />
+                <x-profile.perfil.informacao txt="{{$user['profissao'] ?? 'Nenhum emprego registrado'}}" img="work" />
 
             </div>
         </div>
@@ -60,7 +60,7 @@
                     $path = null;
                 }
             @endphp
-            <x-posts postAuthor="{{ $posts[$cont]['author']['name'] ?? '' }}"
+            <x-profile.posts postAuthor="{{ $posts[$cont]['author']['name'] ?? '' }}"
                 bodyPost="{{ $posts[$cont]['body'] ?? '' }}" :postComent="$posts[$cont]['coments'] ?? ''" :postLikes="$posts[$cont]['likes'] ?? ''"
                 postData="{{ $posts[$cont]['created_at'] }}"
                 pathFotoPerfil="{{$path}}" />

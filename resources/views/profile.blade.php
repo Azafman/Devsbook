@@ -1,5 +1,5 @@
-{{-- @dd($myPosts[0]["fotoPerfil"][1]["caminho_imagem"]) --}}
-<x-estrutura quantidadeAmigos="{{ $quantidadeAmigos ?? 2 }}" name="{{ $user['name'] ?? '' }}" selectPage="my-person"
+{{-- @dd($myPosts) --}}
+<x-estrutura quantidadeAmigos="{{ $relations[1]}}" name="{{ $user['name'] ?? '' }}" selectPage="my-person"
     pathImage="{{ $fotoPerfil }}">
     @slot('bodyFeed')
         <section class="feed" style="position: relative;">
@@ -8,7 +8,7 @@
                 idOfThisUser="{{ $user['id'] }}"
                 pathCover="{{$fotoCover ?? 'media/covers/cover.png'}}"/>
 
-            <x-profile.box-profile pathImage="{{ $fotoPerfil }}" :posts="$myPosts"/>
+        <x-profile.box-profile pathImage="{{ $fotoPerfil }}" :posts="$myPosts"  :user="$user"/>
         </section>
     @endslot
 </x-estrutura>

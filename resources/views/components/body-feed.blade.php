@@ -1,23 +1,24 @@
+{{-- @dd($posts[1]['likes']) --}}
 <main class="posts">
     <div class="item">
         <div class="feed-new-avatar itens">
             <img src="{{ asset($pathImage) }}" />
         </div>
-    
 
-    <div class="feed-new-input-placeholder itens">O que você está pensando, Bonieky?</div>
 
-    <div class="feed-new-send itens">
-        <img src="assets/images/send.png" />
-    </div>
+        <div class="feed-new-input-placeholder itens">O que você está pensando, Bonieky?</div>
 
-    <div class="feed-new-editor m-10 row itens">
-        <div class="feed-new-input" contenteditable="true"></div>
-    </div>
+        <div class="feed-new-send itens">
+            <img src="assets/images/send.png" />
+        </div>
+
+        <div class="feed-new-editor m-10 row itens">
+            <div class="feed-new-input" contenteditable="true"></div>
+        </div>
     </div>
     @for ($contador = 0; $contador < count($posts); $contador++)
         <x-posts postAuthor="{{ $posts[$contador]['author']['name'] }}" bodyPost="{{ $posts[$contador]['body'] }}"
-            :postData="$posts[$contador]['created_at']" :postComent="$posts[$contador]['coments']" :postLikes="$posts[$contador]['likes']" />
+            :postData="$posts[$contador]['created_at']" :postComent="$posts[$contador]['coments']" :postLikes="$posts[$contador]['likes']" fotoPerfil="{{ $fotoPerfil }}" />
     @endfor
 </main>
 <div class="column side pl-5">
